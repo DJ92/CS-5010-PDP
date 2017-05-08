@@ -1,0 +1,8 @@
+CCIS - djosh1992
+
+D - A
+P - A 
+C - 13/15
+
+1) Wrong contract in roster-fn
+2) Wrong contract in helper -> remove-dup

@@ -1,0 +1,18 @@
+TA Name:- Gabriel
+Helper Name:- Prashanth Rajendran
+
+Design Grade:- A
+Presentation Grade - djosh1992:- A
+Presentation Grade - amber723:- A
+Correctness Score:- 
+
+Notes:-
+1. x and y-position interperetation could mention center
+2. contract for lambda missing (After-tick function)
+3. add-newmates effect is not clear
+4. play ground state is used as container
+5. Block factory class is used in cublets
+
+Presentation
+djosh1992 : answered the question
+amber723 : answered the question

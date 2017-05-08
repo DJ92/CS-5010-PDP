@@ -1,0 +1,16 @@
+TA Name:- Gabriel
+Helper Name:- Prashanth
+
+Design Grade:- AB
+Presentation Grade:- A
+Correctness Score:- 10/15
+
+Notes:
+1. Description about the problem and how to start the code can be included
+2. interpretations for the field is missing
+3. contracts for lambdas missing
+4. position of various toys in list of toys 
+5. playGround has time field but its not used any where
+6. could have avoided magic constants
+7. target? approach is not a good approach for this problem though it works
+8. get-data contract violation

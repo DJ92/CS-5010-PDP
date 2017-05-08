@@ -1,0 +1,150 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                       ;; REQUIRED FOR HOMEWORK SUBMISSION                  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+#lang racket
+
+(require rackunit)
+(require "extras.rkt")
+(require "Interfaces.rkt")
+(require "PerfectBounce.rkt")
+
+(provide Model%)
+
+(define RECT-WIDTH 150)
+(define RECT-HEIGHT 100)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                                 ;; MODEL                                   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; A Model% is a (new Model%)
+
+;; The model consists of a particle, bouncing with its center
+;; in a rectangle with 150 width and 100 height.
+;; It accepts commands and reports when its status changes
+
+(define Model%
+  (class* object% (Model<%>)
+    (super-new)
+
+    ; -> Nat
+    ;; boundaries of the field    
+    (field [width RECT-WIDTH])
+    (field [height RECT-HEIGHT])
+
+    ; -> Rect
+    ;; rectangular field
+    (field [rect (make-rect 0 width 0 height)])
+
+    ;; Particle: position and velocity of the object
+    (init-field [particle (make-particle (/ width 2) (/ height 2) 0 0)])
+
+    ; ListOfController<%>
+    (init-field [controllers empty])
+
+    ; -> Bool
+    (init-field [paused? false])
+    
+    ;; -> Void
+    ;; EFFECT: moves the object by v.
+    ;;         reports x at every tick
+    ;;         reports velocity only when it changes
+    (define/public (after-tick)
+      (cond [(not paused?)
+        (set! particle (particle-after-tick particle rect))]))
+    
+    ;; Controller -> Void
+    ;; EFFECT: registers the new controller
+    (define/public (register c)
+      (set! controllers (cons c controllers)))
+
+    ;; -> Int
+    ;; RETURNS: the particle's x or y coordinates and the velocity
+    (define/public (return-particle-x) (particle-x particle))
+    (define/public (return-particle-y) (particle-y particle))
+    (define/public (return-particle-vx) (particle-vx particle))
+    (define/public (return-particle-vy) (particle-vy particle))
+
+    ;; Int -> Void
+    ;; EFFECT: update the particle's x coordinate
+    (define/public (update-particle-x x)
+      (set! particle
+            (make-particle x
+                           (return-particle-y)
+                           (return-particle-vx)
+                           (return-particle-vy))))
+
+    ;; Int -> Void
+    ;; EFFECT: update the particle's y coordinate
+    (define/public (update-particle-y y)
+      (set! particle
+            (make-particle (return-particle-x)
+                           y
+                           (return-particle-vx)
+                           (return-particle-vy))))
+
+    ;; Int -> Void
+    ;; EFFECT: update the particle's velocity in x direction
+    (define/public (update-particle-vx vx)
+      (set! particle
+            (make-particle (return-particle-x)
+                           (return-particle-y)
+                           vx
+                           (return-particle-vy))))
+
+    ;; Int -> Void
+    ;; EFFECT: update the particle's velocity in y direction
+    (define/public (update-particle-vy vy)
+      (set! particle
+            (make-particle (return-particle-x)
+                           (return-particle-y)
+                           (return-particle-vx)
+                           vy)))
+
+    ;; for tests:
+    (define/public (for-test:controllers) controllers)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                                   TESTS                                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(begin-for-test
+  (let*
+      ((m (new Model%)))
+    
+    (check-equal?
+     (begin
+       (send m after-tick)
+       (send m return-particle-x))
+     75)
+    (check-equal?
+     (begin
+       (send m update-particle-x 0)
+       (send m update-particle-y 0)
+       (send m update-particle-vx 10)
+       (send m update-particle-vy 10)
+       (send m return-particle-x))
+     0)
+    (check-equal?
+     (send m return-particle-y)
+     0)
+    (check-equal?
+     (send m return-particle-vx)
+     10)
+    (check-equal?
+     (send m return-particle-vy)
+     10)
+
+    (check-equal?
+     (begin
+       (send m register "test-controller")
+       (send m for-test:controllers))
+     (list "test-controller"))
+    
+    ))
+
+
+    
+
+    

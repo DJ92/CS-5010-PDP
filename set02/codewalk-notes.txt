@@ -1,0 +1,21 @@
+CCS ID: djosh1992 
+
+Reviewer 1: Gabriel
+Reviewer 2: Ankur
+
+Correctness: 4/15
+Design: B
+Presentation: A
+
+Notes:
+
+Code must have 100% test coverage. You are expected to have minimum 100% test coverage of your code except of the big-bang.
+Direction must be have a separate data definition. It cannot be any string.
+xpos is the x-coordinate for the centre of the probe (minor)
+
+probe-forward method is a big mess of code. Make use of helper functions to break down complex tasks. It simplifies the design and improves readability. (major)
+
+probe-north? and other predicates has a condition which evaluates to a boolean. No need to make use of if statements. (minor)
+Avoid using magic constants in your code (minor)
+
+Code must have proper indentation

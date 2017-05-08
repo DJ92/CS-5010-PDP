@@ -1,0 +1,24 @@
+TA Name:- Vishesh
+Helper Name:- Kevin
+
+Design Grade:- AB
+Presentation Grade:-A
+Correctness Score:-10
+
+Design Grade:-AB
+Presentation Grade:-A
+Correctness Score:-10
+
+Notes:-
+
+Pretty
+- line 279 - return description could have been better and others
+- in calling tree - missing recursion call
+- on giving 1 parameter to diff fn - the output misses a paranthesis
+
+Robot
+- missing WHERE
+- line 781 - improve description of halting measure
+
+pay attention to style guide. spaces after cond etc
+100% test coverage not present

@@ -1,0 +1,21 @@
+TA Name:- Prachi
+Helper Name:- Kevin
+
+Name - djosh
+Design Grade:- AB
+Presentation Grade:- A
+Correctness Score:- 15
+
+Name - sanikanikam
+Design Grade:- AB
+Presentation Grade:- A
+Correctness Score:- 15
+
+Notes:- 
+- World need not be a struct
+- missing a fn in template
+- line 549 - refactoring possible
+- line 734 - list funcition could have been used
+- line 917 - missing strategy for lambda (since big function)
+- generalizing functions possible
+- missing indentation

@@ -1,0 +1,18 @@
+TA Name:- Hemanth
+Helper Name:- Kevin
+
+Dheeraj
+Design Grade:- A
+Presentation Grade:- A
+Correctness Score:- 15
+
+Sanika
+Design Grade:- A
+Presentation Grade:- A
+Correctness Score:- 15
+
+Notes:-
+- line 225 - strategy not a call to general functions(combine simpler functions)
+
+Rainfall
+- get-actual-list call is not needed again
